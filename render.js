@@ -34,18 +34,27 @@ socket.on("pause", () => {
   videoPlayer.pause();
 });
 
+function joinRoom(roomId) {
+  socket.emit("joinRoom", roomId);
+  window.localStorage.setItem("roomId", roomId);
+  window.location = "room.html";
+}
+
 newRoomBtn.addEventListener("click", async () => {
   //TODO: Skloni hardkodovan URL
-  window.location = "room.html";
-
-  let res = await axios.get("http://localhost:3000/newRoom");
-  let roomId = res.data.uid;
-  newRoomContainer.innerHTML = roomId;
-  socket.emit("joinRoom", roomId);
+  try {
+    let res = await axios.get("http://localhost:3000/newRoom");
+    let roomId = res.data.uid;
+    newRoomContainer.innerHTML = roomId;
+    joinRoom(roomId);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 joinRoomBtn.addEventListener("click", () => {
-  socket.emit("joinRoom", joinRoomId.value);
+  //socket.emit("joinRoom", joinRoomId.value);
+  joinRoom(joinRoomId.value);
 });
 
 openDialogBtn.addEventListener("click", async () => {

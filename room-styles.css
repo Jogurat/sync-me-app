@@ -9,14 +9,24 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
 .flex-row {
   display: flex;
+  width: 100vw;
 }
 
 .room-id-input {
   width: 50%;
+}
+
+#back-btn {
+  margin-left: 2.5rem;
+}
+
+video {
+  margin-top: 5rem;
+  min-width: 70%;
 }
