@@ -2,5 +2,9 @@
 
 ## TODO
 
-- [x] Task a
-- [ ] Task b
+- [ ] Subtitles
+- [ ] New player
+- [ ] Drag&Drop
+- [ ] Keyboard Shortcuts - F for full screen, K for pause...
+- [ ] Seek sync
+- [ ] Loading screen

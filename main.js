@@ -1,7 +1,7 @@
 const { app, BrowserWindow, crashReporter, dialog, Menu } = require("electron");
 
 function createWindow() {
-  // Menu.setApplicationMenu(false);
+  if (app.isPackaged) Menu.setApplicationMenu(false);
 
   const win = new BrowserWindow({
     width: 1100,
@@ -12,7 +12,7 @@ function createWindow() {
   });
   win.loadFile("index.html");
   // win.setMenuBarVisibility(false);
-  win.webContents.openDevTools();
+  if (!app.isPackaged) win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
