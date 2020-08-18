@@ -9,17 +9,39 @@
       content="script-src 'self' 'unsafe-inline';"
     />
     <link rel="stylesheet" href="bulma.min.css" />
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="flex-container">
-      <h1>Hello World!</h1>
-      <button class="is-primary button" id="new-room">Create New Room</button>
+      <!-- <h1>Hello World!</h1> -->
+      <div class="flex-row">
+        <div class="left">
+          <h1>Create Room</h1>
+          <button class="is-primary button" id="new-room">
+            <span class="icon">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </span>
+            <span>
+              Create new room
+            </span>
+          </button>
+        </div>
+        <div class="right">
+          <h1>Join Room</h1>
+          <input class="input" type="text" name="" id="join-room-id" />
+          <button class="is-secondary button" id="join-room-btn">
+            <span class="icon">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+            </span>
+            <span>
+              Join room
+            </span>
+          </button>
+        </div>
+      </div>
       <h1 class="room-id"></h1>
-      <button class="is-secondary button" id="join-room-btn">
-        Join a Room
-      </button>
-      <input class="input" type="text" name="" id="join-room-id" />
+
       <!-- <button class="button is-dark" id="open-vid">Open Video</button>
       <video src="" id="vid" controls></video> -->
     </div>

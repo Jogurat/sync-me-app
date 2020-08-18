@@ -1,6 +1,6 @@
-const { clipboard } = require("electron");
+const { remote, clipboard } = require("electron");
 const { dialog } = require("electron").remote;
-
+const fs = remote.require("fs");
 //TODO: Skloni hardkodovan URL
 
 const socket = io("https://sync-me-app-server.herokuapp.com");
@@ -98,7 +98,45 @@ openSubsBtn.addEventListener("click", async () => {
     properties: ["openFile"],
     filters: [{ name: "Subtitles", extensions: ["srt", "vtt"] }],
   });
-  subtitles.setAttribute("src", path.filePaths[0]);
+
+  const originalPath = path.filePaths[0];
+
+  // Get subtitle file extension
+  let extension = path.filePaths[0].substring(
+    originalPath.length - 3,
+    originalPath.length
+  );
+
+  // If subtitle is .srt, convert it to .vtt, and use that instead
+  let subtitlePath;
+  if (extension === "srt") {
+    fs.readFile(originalPath, "utf8", (err, data) => {
+      console.log("hi??");
+      if (err) {
+        console.log(err);
+      } else {
+        //console.log(data);
+        let regex = /(\d),(\d)/g;
+        const vtt = data.replace(regex, "$1.$2");
+        let newSubtitles = "WEBVTT\n\n" + vtt;
+        //console.log(newSubtitles);
+        console.log(originalPath);
+        const newPath =
+          originalPath.substring(0, originalPath.length - 3) +
+          "- by SyncMeApp.vtt";
+        console.log(newPath);
+        fs.writeFile(newPath, newSubtitles, (err) => {
+          if (err) console.log(err);
+          subtitlePath = newPath;
+          subtitles.setAttribute("src", subtitlePath);
+        });
+      }
+    });
+  } else {
+    subtitlePath = originalPath;
+    subtitles.setAttribute("src", subtitlePath);
+  }
+  console.log(extension);
 });
 
 init();
