@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  background-color: #0d1b2a;
 }
 
 .flex-row {
@@ -23,14 +24,38 @@
 }
 
 #back-btn {
+  position: absolute;
+  margin-top: 2.5rem;
   margin-left: 2.5rem;
+  outline: none;
+  border: none;
 }
 
 video {
-  margin-top: 5rem;
+  margin-top: 3rem;
   min-width: 70%;
+  max-width: 70%;
+  max-height: initial;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.btn {
+  /* min-width: 30%; */
+  background-color: #e0e1dd;
+  color: #1b263b;
+  font-weight: bold;
+  /* padding: 50px; */
+  outline: none;
+}
+
+.btn:hover {
+  background-color: #778da9;
+  color: #e0e1dd;
+}
+
+#open-vid {
+  margin-bottom: 0.5rem;
 }

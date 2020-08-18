@@ -8,3 +8,4 @@
 - [ ] Keyboard Shortcuts - F for full screen, K for pause...
 - [x] Seek sync
 - [ ] Loading screen
+- [ ] Clean up file structure
