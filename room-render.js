@@ -122,8 +122,8 @@ openSubsBtn.addEventListener("click", async () => {
         //console.log(newSubtitles);
         console.log(originalPath);
         const newPath =
-          originalPath.substring(0, originalPath.length - 3) +
-          "- by SyncMeApp.vtt";
+          originalPath.substring(0, originalPath.length - 4) +
+          " - by SyncMeApp.vtt";
         console.log(newPath);
         fs.writeFile(newPath, newSubtitles, (err) => {
           if (err) console.log(err);
