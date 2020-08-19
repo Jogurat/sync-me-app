@@ -2,7 +2,7 @@
   "name": "SyncMeApp",
   "version": "1.0.0",
   "description": "App that syncs up videos",
-  "main": "main.js",
+  "main": "js/main.js",
   "scripts": {
     "start": "electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -35,7 +35,8 @@
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
+            "darwin",
+            "win32"
           ]
         },
         {

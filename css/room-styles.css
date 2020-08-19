@@ -21,6 +21,11 @@
 
 .room-id-input {
   width: 50%;
+  margin-top: 1rem;
+}
+
+#copy-id {
+  margin-top: 1rem;
 }
 
 #back-btn {

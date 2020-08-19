@@ -10,7 +10,7 @@ function createWindow() {
       nodeIntegration: true,
     },
   });
-  win.loadFile("index.html");
+  win.loadFile("html/index.html");
   // win.setMenuBarVisibility(false);
   if (!app.isPackaged) win.webContents.openDevTools();
 }
