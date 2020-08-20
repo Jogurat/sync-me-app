@@ -105,6 +105,7 @@ openSubsBtn.addEventListener("click", async () => {
     filters: [{ name: "Subtitles", extensions: ["srt", "vtt"] }],
   });
 
+  if (path.canceled) return;
   const originalPath = path.filePaths[0];
 
   // Get subtitle file extension
