@@ -76,16 +76,16 @@
   /* width: 30%; */
   background-color: #778da9;
   color: #e0e1dd;
-  border: none;
+  border: 5px #0d1b2a;
 }
 
-/* #join-room-btn:hover {
-  /* width: 30%; 
+#join-room-btn:hover {
+  /* width: 30%; */
   color: #1b263b;
   font-weight: bold;
   background-color: #e0e1dd;
   border: none;
-} */
+}
 
 ::-webkit-scrollbar {
   display: none;

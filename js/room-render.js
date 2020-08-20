@@ -12,6 +12,7 @@ const videoPlayer = document.querySelector("#vid");
 const openDialogBtn = document.querySelector("#open-vid");
 const openSubsBtn = document.querySelector("#open-subs");
 const subtitles = document.querySelector("#subs");
+const copiedToast = document.querySelector(".toast");
 let roomId = window.localStorage.getItem("roomId");
 
 function init() {
@@ -22,6 +23,11 @@ function init() {
 
 function copyIdToClipboard() {
   clipboard.writeText(copyInput.value);
+  copiedToast.classList.toggle("show");
+
+  setTimeout(() => {
+    copiedToast.classList.toggle("show");
+  }, 1000);
 }
 
 function goHome() {
@@ -90,7 +96,7 @@ openDialogBtn.addEventListener("click", async () => {
     properties: ["openFile"],
     filters: [{ name: "Movies", extensions: ["mkv", "avi", "mp4"] }],
   });
-  videoPlayer.setAttribute("src", path.filePaths[0]);
+  if (!path.canceled) videoPlayer.setAttribute("src", path.filePaths[0]);
 });
 
 openSubsBtn.addEventListener("click", async () => {
