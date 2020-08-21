@@ -47,7 +47,7 @@ newRoomBtn.addEventListener("click", async () => {
   //TODO: Skloni hardkodovan URL
   try {
     let icon = document.createElement("i");
-    newRoomBtnText.innerHTML = "";
+    newRoomBtn.removeChild(newRoomBtnText);
     icon.classList = "fa fa-spinner fa-pulse fa-2x fa-fw";
     spinIcon.appendChild(icon);
     spinIcon.removeChild(plusIcon);
