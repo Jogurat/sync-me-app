@@ -7,6 +7,9 @@ const { dialog } = require("electron").remote;
 // const videoPlayer = document.querySelector("#vid");
 // const openDialogBtn = document.querySelector("#open-vid");
 const newRoomBtn = document.querySelector("#new-room");
+const spinIcon = document.querySelector("#spin-icon");
+const newRoomBtnText = document.querySelector("#create-new-room");
+const plusIcon = document.querySelector("#plus-icon");
 const newRoomContainer = document.querySelector(".room-id");
 const joinRoomBtn = document.querySelector("#join-room-btn");
 //TODO bolje ime
@@ -43,9 +46,15 @@ function joinRoom(roomId) {
 newRoomBtn.addEventListener("click", async () => {
   //TODO: Skloni hardkodovan URL
   try {
+    let icon = document.createElement("i");
+    newRoomBtnText.innerHTML = "";
+    icon.classList = "fa fa-spinner fa-pulse fa-2x fa-fw";
+    spinIcon.appendChild(icon);
+    spinIcon.removeChild(plusIcon);
     let res = await axios.get(
       "https://sync-me-app-server.herokuapp.com/newroom"
     );
+    spinIcon.removeChild(icon);
     let roomId = res.data.uid;
     newRoomContainer.innerHTML = roomId;
     joinRoom(roomId);
@@ -56,7 +65,7 @@ newRoomBtn.addEventListener("click", async () => {
 
 joinRoomBtn.addEventListener("click", () => {
   //socket.emit("joinRoom", joinRoomId.value);
-  joinRoom(joinRoomId.value);
+  if (joinRoomId.value !== "") joinRoom(joinRoomId.value);
 });
 
 // openDialogBtn.addEventListener("click", async () => {
