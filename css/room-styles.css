@@ -50,6 +50,10 @@ video {
   max-height: initial;
 }
 
+video:focus {
+  outline: none;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

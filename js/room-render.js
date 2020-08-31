@@ -37,31 +37,31 @@ function goHome() {
 let wasEmittedPlay = false;
 
 function emitPlay() {
-  // if (!wasEmittedPlay) {
-  socket.emit("play", roomId);
-  wasEmittedPlay = false;
-  console.log("emmiting play", roomId);
-  // }
+  if (!wasEmittedPlay) {
+    socket.emit("play", roomId);
+    //wasEmittedPlay = false;
+    console.log("emmiting play", roomId);
+  }
 }
 
 let wasEmittedPause = false;
 
 function emitPause() {
-  // if (!wasEmittedPause) {
-  socket.emit("pause", roomId);
-  wasEmittedPause = false;
-  console.log("emmiting pause", roomId);
-  // }
+  if (!wasEmittedPause) {
+    socket.emit("pause", roomId);
+    //wasEmittedPause = false;
+    console.log("emmiting pause", roomId);
+  }
 }
 
 let seekTime = -1;
 
 function emitSeek() {
-  if (seekTime !== videoPlayer.currentTime) {
+  if (seekTime !== videoPlayer.currentTime && !wasEmittedSeek) {
     seekTime = videoPlayer.currentTime;
     console.log("emmiting seek");
 
-    wasEmittedSeek = true;
+    //wasEmittedSeek = true;
     socket.emit("seek", { roomId, currentTime: videoPlayer.currentTime });
   }
 }
@@ -69,20 +69,32 @@ function emitSeek() {
 socket.on("play", () => {
   console.log("hello from socket play");
   wasEmittedPlay = true;
-  videoPlayer.play();
+  if (videoPlayer.paused) videoPlayer.play();
+  //wasEmittedPlay = false;
+  setTimeout(() => {
+    wasEmittedPlay = false;
+  }, 10);
 });
 
 socket.on("pause", () => {
   wasEmittedPause = true;
-  videoPlayer.pause();
+  if (!videoPlayer.paused) videoPlayer.pause();
+  // wasEmittedPause = false;
+  setTimeout(() => {
+    wasEmittedPause = false;
+  }, 10);
 });
 
 let wasEmittedSeek = false;
 
 socket.on("seek", (currentTime) => {
   if (videoPlayer.currentTime !== currentTime) {
-    videoPlayer.currentTime = currentTime;
     wasEmittedSeek = true;
+    videoPlayer.currentTime = currentTime;
+    // wasEmittedSeek = false;
+    setTimeout(() => {
+      wasEmittedSeek = false;
+    }, 100);
   }
 });
 

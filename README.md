@@ -8,4 +8,12 @@
 - [ ] Keyboard Shortcuts - F for full screen, K for pause...
 - [x] Seek sync
 - [ ] Loading screen
-- [ ] Clean up file structure
+- [x] Clean up file structure
+- [ ] Auto updating
+
+## Known bugs/issues
+
+- [x] Playing/pausing too fast makes a play-pause loop
+- [ ] Seeking still not good when the video is already playing
+- [ ] What happens when a new user joins a party that's already watching the video?
+- [ ] When opening another instance of the app, it takes longer to load?
