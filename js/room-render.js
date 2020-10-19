@@ -57,12 +57,21 @@ function emitPause() {
 let seekTime = -1;
 
 function emitSeek() {
-  if (seekTime !== videoPlayer.currentTime && !wasEmittedSeek) {
+  if (!wasEmittedSeek) {
     seekTime = videoPlayer.currentTime;
     console.log("emmiting seek");
 
     //wasEmittedSeek = true;
     socket.emit("seek", { roomId, currentTime: videoPlayer.currentTime });
+  }
+}
+
+async function pingServer() {
+  try {
+    let res = await axios.get("https://sync-me-app-server.herokuapp.com/ping");
+    console.log(res.data.msg);
+  } catch (err) {
+    console.log("Error reaching server");
   }
 }
 
@@ -87,14 +96,21 @@ socket.on("pause", () => {
 
 let wasEmittedSeek = false;
 
+// TODO: FIX THIS
 socket.on("seek", (currentTime) => {
   if (videoPlayer.currentTime !== currentTime) {
     wasEmittedSeek = true;
+    videoPlayer.pause();
     videoPlayer.currentTime = currentTime;
     // wasEmittedSeek = false;
-    setTimeout(() => {
-      wasEmittedSeek = false;
-    }, 100);
+    // setTimeout(() => {
+    //   wasEmittedSeek = false;
+    // }, 50);
+    videoPlayer.play();
+    while (videoPlayer.currentTime !== currentTime) {
+      wasEmittedSeek = true;
+    }
+    wasEmittedSeek = false;
   }
 });
 
@@ -159,3 +175,5 @@ openSubsBtn.addEventListener("click", async () => {
 });
 
 init();
+//Keeps heroku server alive, pings the server every 10 minutes (600000ms)
+setInterval(pingServer, 600000);

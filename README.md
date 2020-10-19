@@ -10,6 +10,7 @@
 - [ ] Loading screen
 - [x] Clean up file structure
 - [ ] Auto updating
+- [ ] Better error handling/informing for the user
 
 ## Known bugs/issues
 
