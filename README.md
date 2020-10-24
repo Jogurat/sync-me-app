@@ -1,4 +1,4 @@
-# SyncMeApp - Watch videos together with your frinds
+# SyncMeApp - Watch videos together with your friends
 
 ## TODO
 

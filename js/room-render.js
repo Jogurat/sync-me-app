@@ -57,12 +57,14 @@ function emitPause() {
 let seekTime = -1;
 
 function emitSeek() {
-  if (!wasEmittedSeek) {
+  if (!gotSeek) {
+    wasEmittedSeek = true;
     seekTime = videoPlayer.currentTime;
     console.log("emmiting seek");
-
-    //wasEmittedSeek = true;
     socket.emit("seek", { roomId, currentTime: videoPlayer.currentTime });
+    setTimeout(() => {
+      wasEmittedSeek = false;
+    }, 500);
   }
 }
 
@@ -95,23 +97,18 @@ socket.on("pause", () => {
 });
 
 let wasEmittedSeek = false;
+let gotSeek = false;
 
 // TODO: FIX THIS
 socket.on("seek", (currentTime) => {
-  if (videoPlayer.currentTime !== currentTime) {
-    wasEmittedSeek = true;
-    videoPlayer.pause();
+  gotSeek = true;
+  if (videoPlayer.currentTime !== currentTime && !wasEmittedSeek) {
     videoPlayer.currentTime = currentTime;
-    // wasEmittedSeek = false;
-    // setTimeout(() => {
-    //   wasEmittedSeek = false;
-    // }, 50);
-    videoPlayer.play();
-    while (videoPlayer.currentTime !== currentTime) {
-      wasEmittedSeek = true;
-    }
-    wasEmittedSeek = false;
+    console.log("got seek from socket");
   }
+  setTimeout(() => {
+    gotSeek = false;
+  }, 500);
 });
 
 copyBtn.addEventListener("click", copyIdToClipboard);

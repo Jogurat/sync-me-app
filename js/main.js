@@ -1,5 +1,7 @@
 const { app, BrowserWindow, crashReporter, dialog, Menu } = require("electron");
 
+if (require("electron-squirrel-startup")) return app.quit();
+
 function createWindow() {
   if (app.isPackaged) Menu.setApplicationMenu(false);
 
@@ -13,6 +15,13 @@ function createWindow() {
   win.loadFile("html/index.html");
   // win.setMenuBarVisibility(false);
   if (!app.isPackaged) win.webContents.openDevTools();
+}
+
+if (app.isPackaged) {
+  require("update-electron-app")({
+    repo: "jogurat/sync-me-app",
+    updateInterval: "5 minutes",
+  });
 }
 
 app.whenReady().then(createWindow);

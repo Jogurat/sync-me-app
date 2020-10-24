@@ -1,6 +1,6 @@
 {
   "name": "SyncMeApp",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "App that syncs up videos",
   "main": "js/main.js",
   "scripts": {
@@ -20,7 +20,8 @@
     "electron": "^9.2.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^2.0.1"
   },
   "config": {
     "forge": {
